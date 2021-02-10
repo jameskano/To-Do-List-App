@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+  <meta charset="utf-8">
+  <title>To Do List</title>
+
+  <meta content="width=device-width, initial-scale=1" name="viewport" />
+
+  <!--Font Awesome-->
+  <script src="https://kit.fontawesome.com/0fa68b04a7.js" crossorigin="anonymous"></script>
+
+  <!-- CSS Stylesheet -->
+  <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="css/menu.css">
+
+</head>
+
+<body>
+
+<div class="box" id="heading">
+  <h1>Lista de tareas</h1>
+
+  <!-- Menu button -->
+  <button type="button" name="button" id="menu-button" class="menu-btn" title="menú"><i class="fas fa-cog fa-3x"></i></button>
+
+  <!-- Menu -->
+  <div class="menu" id="menu">
+    <div class="menu-list">
+      <div class="">
+        <div class="menu-element menu-element-1">
+          <p class="menu-paragraph">Modo nocturno</p>
+        </div>
+        <div class="switch-container">
+          <input id="switch-shadow" class="switch switch--shadow" type="checkbox">
+          <label for="switch-shadow"></label>
+        </div>
+      </div>
+      <div class="menu-element font-sizes-father">
+        <p class="menu-paragraph">Cambiar tamaño de fuente</p>
+        <div class="font-sizes">
+          <i class="fas fa-font small-font"></i>
+          <i class="fas fa-font normal-font"></i>
+          <i class="fas fa-font large-font"></i>
+        </div>
+      </div>
+      <div class="menu-element" id="featured">
+        <a href="destacados"><p class="menu-paragraph">Destacados</p></a>
+      </div>
+      <div class="menu-element menu-social">
+        <p class="menu-paragraph">Contacto</p>
+        <div class="social">
+          <a target="_blank" href="mailto:info@todolist.com"><i class="fas fa-envelope fa-2x social-element"></i></a>
+          <a target="_blank" href="https://twitter.com/"><i class="fab fa-twitter fa-2x social-element"></i></a>
+          <a target="_blank" href="https://play.google.com/"><i class="fab fa-google-play fa-2x social-element"></i></a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Lists -->
+<div class="box">
+  <div class="scroll">
+    <% listTitle.forEach(function(list) { %>
+    <div class="item">
+      <form class="delete-form" action="/deletelist" method="post">
+        <a href="<%= list.name %>" class="link-list"><p><a href="<%= list.name %>"><%= list.name %></a></p></a>
+        <button type="submit" name="deletelist" value="<%= list._id %>" class="delete-list" title="eliminar"><i class="fas fa-trash-alt"></i></button>
+      </form>
+      <iframe name="skip" style="display:none;"></iframe>
+      <form class="" action="/destacados" method="post" target="skip">
+        <i class="fas fa-star" title="destacado"></i>
+        <button type="submit" value="<%= list._id %>" name="featuredId" class="featured-button"></button>
+        <input type="hidden" name="" value="<%= list.featured %>" class="featured-value">
+      </form>
+    </div>
+    <% }) %>
+  </div>
+
+  <!-- Create new list input -->
+  <form class="item enter" action="/" method="post">
+    <input type="text" name="newList" value="" placeholder="Nueva lista">
+    <button type="submit" name="listButton" value="<%=  %>" class="submit">+</button>
+  </form>
+</div>
+
+
+<!-- Confirm list deletion -->
+<div class="delete-confirmation">
+  <p>Are you sure you want to delete it?</p>
+  <div class="buttons">
+    <button type="button" name="button" id="yes">YES</button>
+    <button type="button" name="button" id="no">NO</button>
+  </div>
+</div>
+
+<div class="background-confirmation"></div>
+
+<!-- "Added to featured" notification -->
+<div class="featured-add">
+  <p>Añadido a destacados</p>
+</div>
+
+<!-- "Removed from featured" notification -->
+<div class="featured-remove">
+  <p>Eliminado de destacados</p>
+</div>
+
+<script src="js/index.js" charset="utf-8"></script>
+
+<%- include("footer") -%>

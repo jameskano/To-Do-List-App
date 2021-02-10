@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+  <meta charset="utf-8">
+  <title>To Do List</title>
+
+  <meta content="width=device-width, initial-scale=1" name="viewport" />
+
+  <!--Font Awesome-->
+  <script src="https://kit.fontawesome.com/0fa68b04a7.js" crossorigin="anonymous"></script>
+
+  <!-- CSS Stylesheet -->
+  <link rel="stylesheet" href="css/list.css">
+  <link rel="stylesheet" href="css/menu.css">
+
+</head>
+
+<body>
+
+<div class="box" id="heading">
+  <h1> <%= title %> </h1>
+
+  <!-- Menu button -->
+  <button type="button" name="button" id="menu-button" class="menu-btn"><i class="fas fa-cog fa-3x"></i></button>
+
+  <!-- Home button -->
+  <a href="/"><button type="button" name="button" class="menu-btn home"><i class="fas fa-home fa-3x"></i></button></a>
+
+  <!-- Menu -->
+  <div class="menu" id="menu">
+    <div class="menu-list">
+      <div class="">
+        <div class="menu-element menu-element-1">
+          <p class="menu-paragraph">Modo nocturno</p>
+        </div>
+        <div class="switch-container">
+          <input id="switch-shadow" class="switch switch--shadow" type="checkbox">
+          <label for="switch-shadow"></label>
+        </div>
+      </div>
+      <div class="menu-element" id="home">
+        <a href="/"><p class="element-paragraph"><strong>Inicio</strong></p></a>
+      </div>
+      <div class="menu-element font-sizes-father">
+        <p class="menu-paragraph">Cambiar tamaño de fuente</p>
+        <div class="font-sizes">
+          <i class="fas fa-font small-font"></i>
+          <i class="fas fa-font normal-font"></i>
+          <i class="fas fa-font large-font"></i>
+        </div>
+      </div>
+      <div class="menu-element" id="featured">
+        <a href="/destacados"><p class="menu-paragraph">Destacados</p></a>
+      </div>
+      <div class="menu-element menu-social">
+        <p class="menu-paragraph">Contacto</p>
+        <div class="social">
+          <a target="_blank" href="mailto:info@todolist.com"><i class="fas fa-envelope fa-2x social-element"></i></a>
+          <a target="_blank" href="https://twitter.com/"><i class="fab fa-twitter fa-2x social-element"></i></a>
+          <a target="_blank" href="https://play.google.com/"><i class="fab fa-google-play fa-2x social-element"></i></a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- List items -->
+<div class="box">
+  <div class="scroll">
+    <% items.forEach(function(item) { %>
+    <form class="" action="/delete" method="post">
+      <div class="item">
+        <input type="checkbox" name="checkbox" value="<%= item._id %>" onChange="this.form.submit()">
+        <p> <%= item.name %> </p>
+        <input type="hidden" name="listName" value="<%= title %>">
+      </div>
+    </form>
+    <% }) %>
+  </div>
+
+  <!-- Create new item input -->
+  <form class="item enter" action="/list" method="post">
+    <input type="text" name="newItem" value="" placeholder="Nueva tarea">
+    <button type="submit" name="listButton" value="<%= title %>" class="submit">+</button>
+  </form>
+</div>
+
+<script src="js/list.js" charset="utf-8"></script>
+
+<%- include("footer") -%>
